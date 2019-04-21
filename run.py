@@ -4,7 +4,8 @@ import torch
 import torch.optim as optim
 from data_loader import SpeechDataLoader
 import numpy as np
-from model import LeNet, VGG
+import model
+from model import LeNet, VGG, Resnet
 from train import train, test, val
 import os
 
@@ -81,6 +82,8 @@ if args.arc == 'LeNet':
     model = LeNet()
 elif args.arc.startswith('VGG'):
     model = VGG(args.arc)
+elif args.arc.startswith('resnet'):
+    model = model.create_resnet_model(model_name=args.arc,num_classes=30, in_channels=1)
 else:
     model = LeNet()
 
